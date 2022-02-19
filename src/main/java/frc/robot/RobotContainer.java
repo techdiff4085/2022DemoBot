@@ -8,9 +8,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.SpinnyThingyCommand;
 import frc.robot.commands.ToggleFastModeCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.SpinnySub;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -24,6 +26,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private final SpinnySub m_spinnySub = new SpinnySub();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final XboxController m_xboxController = new XboxController(0);
@@ -46,6 +49,9 @@ public class RobotContainer {
      JoystickButton buttonX = new JoystickButton(m_xboxController, XboxController.Button.kX.value);
      buttonX
       .whenActive(new ToggleFastModeCommand(m_driveSubsystem));
+      JoystickButton buttonA = new JoystickButton(m_xboxController, XboxController.Button.kA.value);
+     buttonA
+      .whenActive(new SpinnyThingyCommand(m_spinnySub));
   }
 
   /**
