@@ -6,12 +6,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class SpinnySub extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private WPI_VictorSPX spinmoter = new WPI_VictorSPX(1);
 
+  private DigitalInput limitSwitch = new DigitalInput(Constants.Spinnythinglimit);
 
   public SpinnySub() {}
 
@@ -27,5 +30,13 @@ public class SpinnySub extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+  public boolean StopLimitSwitch() {
+    if(limitSwitch.get()){
+      spinmoter.set(0);
+      return true;
+    } else {
+      return false;
+    }
   }
 }
