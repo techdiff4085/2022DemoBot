@@ -18,5 +18,6 @@ public final class Constants {
     public static int LeftRearWheel = 13;
     public static int RightRearWheel = 0;
 
+    public static int SpinnyLimitSwitch = 9;
     public static int SpinnyThing = 1;
 }
