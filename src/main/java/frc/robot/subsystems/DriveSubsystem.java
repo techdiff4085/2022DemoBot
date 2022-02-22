@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,13 +18,10 @@ public class DriveSubsystem extends SubsystemBase {
     private WPI_TalonFX rearRight = new WPI_TalonFX(Constants.RightRearWheel);
 
     private MecanumDrive mechanumDrive;
-    private XboxController xboxController;
-
     private boolean isFastMode = true;
 
   public DriveSubsystem() {
     mechanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
-    xboxController = new XboxController(0);
     frontRight.setInverted(true);
     rearRight.setInverted(true);
   }
@@ -34,20 +30,12 @@ public class DriveSubsystem extends SubsystemBase {
     isFastMode = !isFastMode;
   }
 
-  public void drive(){
-    if (isFastMode){
-      mechanumDrive.driveCartesian(
-        xboxController.getLeftY(), 
-        xboxController.getLeftX()*Math.abs(xboxController.getLeftX()), 
-        xboxController.getRightX()
-      );
-    } else {
-      mechanumDrive.driveCartesian(
-        xboxController.getLeftY()/8, 
-        xboxController.getLeftX()/8, 
-        xboxController.getRightX()/5
-      );
-    }
+  public boolean getIsFastMode(){
+    return isFastMode;
+  }
+
+  public void drive(double y, double x, double z){
+      mechanumDrive.driveCartesian(y, x, z);
   }
 
   @Override

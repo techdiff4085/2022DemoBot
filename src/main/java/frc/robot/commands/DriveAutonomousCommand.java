@@ -5,23 +5,26 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class DriveCommand extends CommandBase {
+public class DriveAutonomousCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_driveSubsystem;
-  private final XboxController m_xboxController;
+  private double m_x;
+  private double m_y;
+  private double m_z;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveCommand(DriveSubsystem subsystem, XboxController xboxController) {
+  public DriveAutonomousCommand(DriveSubsystem subsystem, double y, double x, double z) {
     m_driveSubsystem = subsystem;
-    m_xboxController = xboxController;
+    m_y = y;
+    m_x = x;
+    m_z = z;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -33,15 +36,7 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double y = m_xboxController.getLeftY();
-    double x = m_xboxController.getLeftX();
-    double z = m_xboxController.getRightX();
-
-    if (m_driveSubsystem.getIsFastMode()){
-      m_driveSubsystem.drive(y, x, z);
-    } else {
-      m_driveSubsystem.drive(y/8, x/8, z/5);
-    }
+    m_driveSubsystem.drive(m_y, m_x, m_z);
   }
 
   // Called once the command ends or is interrupted.
@@ -51,6 +46,6 @@ public class DriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
