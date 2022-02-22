@@ -26,6 +26,8 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
     mechanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
     xboxController = new XboxController(0);
+    frontRight.setInverted(true);
+    rearRight.setInverted(true);
   }
 
   public void toggleFastMode(){
@@ -36,14 +38,14 @@ public class DriveSubsystem extends SubsystemBase {
     if (isFastMode){
       mechanumDrive.driveCartesian(
         xboxController.getLeftY(), 
-        xboxController.getLeftX()*Math.abs(xboxController.getLeftX())/2, 
-        xboxController.getRightY()
+        xboxController.getLeftX()*Math.abs(xboxController.getLeftX()), 
+        xboxController.getRightX()
       );
     } else {
       mechanumDrive.driveCartesian(
-        xboxController.getLeftY()/2, 
-        xboxController.getLeftX()*Math.abs(xboxController.getLeftX())/4, 
-        xboxController.getRightY()/2
+        xboxController.getLeftY()/8, 
+        xboxController.getLeftX()/8, 
+        xboxController.getRightX()/5
       );
     }
   }
