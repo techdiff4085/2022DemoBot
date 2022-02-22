@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveAutonomousCommand;
@@ -38,6 +39,8 @@ public class RobotContainer {
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem, m_xboxController);
 
   private final SendableChooser<Command> m_sendableChooser = new SendableChooser<>();
+
+  private Spark m_lights = new Spark(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
