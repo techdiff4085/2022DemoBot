@@ -49,7 +49,7 @@ public class RobotContainer {
 
     m_sendableChooser.setDefaultOption("RobotGoBurrr", new RobotGoBurrrrrCommand(m_driveSubsystem));
     m_sendableChooser.addOption("RotateAutonomous", new RotateAutonomousCommand(m_driveSubsystem));
-    m_sendableChooser.addOption("ThatOneAuto", new ThatOneAutoCommand(m_driveSubsystem));
+    m_sendableChooser.addOption("ThatOneAuto", new ThatOneAutoCommand(m_driveSubsystem, m_lights));
 
     SmartDashboard.putData(m_sendableChooser);
 

@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -13,14 +13,16 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 public class ThatOneAutoCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
+  private Spark m_lights;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ThatOneAutoCommand(DriveSubsystem subsystem) {
+  public ThatOneAutoCommand(DriveSubsystem subsystem, Spark lights) {
     m_subsystem = subsystem;
+    m_lights = lights;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -32,6 +34,7 @@ public class ThatOneAutoCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_lights.set(-0.83);
     addCommands(
     new DriveAutonomousCommand(m_subsystem, 0.1, 0, 0),
     new WaitCommand(3),
@@ -49,6 +52,6 @@ public class ThatOneAutoCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
