@@ -48,7 +48,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_sendableChooser.setDefaultOption("RobotGoBurrr", new RobotGoBurrrrrCommand(m_driveSubsystem));
-    m_sendableChooser.addOption("RotateAutonomous", new RotateAutonomousCommand(m_driveSubsystem));
+    m_sendableChooser.addOption("RotateAutonomous", new RotateAutonomousCommand(m_driveSubsystem, m_lights));
     m_sendableChooser.addOption("ThatOneAuto", new ThatOneAutoCommand(m_driveSubsystem));
 
     SmartDashboard.putData(m_sendableChooser);
