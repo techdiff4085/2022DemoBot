@@ -5,22 +5,24 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /** An example command that uses an example subsystem. */
-public class RotateAutonomousCommand extends CommandBase {
+public class RotateAutonomousCommand extends SequentialCommandGroup {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
+  private final Spark m_lights;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public RotateAutonomousCommand(DriveSubsystem subsystem) {
+  public RotateAutonomousCommand(DriveSubsystem subsystem, Spark lights) {
     m_subsystem = subsystem;
+    m_lights = lights;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -32,9 +34,13 @@ public class RotateAutonomousCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    new DriveAutonomousCommand(m_subsystem, 0, 0, 0.5);
-    new WaitCommand(.5);
-    new DriveAutonomousCommand(m_subsystem, 0, 0, 0);
+    m_lights.set(-0.99);
+
+    addCommands(
+      new DriveAutonomousCommand(m_subsystem, 0, 0, 0.5),
+      new WaitCommand(.5),
+      new DriveAutonomousCommand(m_subsystem, 0, 0, 0)
+    );
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +50,6 @@ public class RotateAutonomousCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

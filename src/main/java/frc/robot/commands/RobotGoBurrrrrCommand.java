@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -13,14 +14,16 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 public class RobotGoBurrrrrCommand extends SequentialCommandGroup {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
+  private final Spark m_lights;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public RobotGoBurrrrrCommand(DriveSubsystem subsystem) {
+  public RobotGoBurrrrrCommand(DriveSubsystem subsystem, Spark lights) {
     m_subsystem = subsystem;
+    m_lights = lights;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -32,6 +35,7 @@ public class RobotGoBurrrrrCommand extends SequentialCommandGroup {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_lights.set(0.23);
     addCommands(
     new DriveAutonomousCommand(m_subsystem, 0.1, 0, 0),  
     new WaitCommand(1),
@@ -47,6 +51,6 @@ public class RobotGoBurrrrrCommand extends SequentialCommandGroup {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
