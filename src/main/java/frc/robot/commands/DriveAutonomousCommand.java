@@ -14,17 +14,20 @@ public class DriveAutonomousCommand extends CommandBase {
   private double m_x;
   private double m_y;
   private double m_z;
+  private int m_numMilliseconds;
+  private double m_startTime;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveAutonomousCommand(DriveSubsystem subsystem, double y, double x, double z) {
+  public DriveAutonomousCommand(DriveSubsystem subsystem, double y, double x, double z, int numMilliseconds) {
     m_driveSubsystem = subsystem;
     m_y = y;
     m_x = x;
     m_z = z;
+    m_numMilliseconds = numMilliseconds;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -36,7 +39,10 @@ public class DriveAutonomousCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveSubsystem.drive(m_y, m_x, m_z);
+    m_startTime = System.currentTimeMillis();
+    while (System.currentTimeMillis() - m_startTime < m_numMilliseconds){
+      m_driveSubsystem.drive(m_y, m_x, m_z);
+    }
   }
 
   // Called once the command ends or is interrupted.

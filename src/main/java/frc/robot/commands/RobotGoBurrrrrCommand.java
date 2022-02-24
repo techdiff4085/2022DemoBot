@@ -7,50 +7,18 @@ package frc.robot.commands;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 
 /** An example command that uses an example subsystem. */
 public class RobotGoBurrrrrCommand extends SequentialCommandGroup {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveSubsystem m_subsystem;
-  private final Spark m_lights;
 
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public RobotGoBurrrrrCommand(DriveSubsystem subsystem, Spark lights) {
-    m_subsystem = subsystem;
-    m_lights = lights;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    m_lights.set(0.23);
+  public RobotGoBurrrrrCommand(DriveSubsystem driveSubsystem, Spark lights) {
+    lights.set(0.93);
     addCommands(
-    new DriveAutonomousCommand(m_subsystem, 0.1, 0, 0),  
-    new WaitCommand(1),
-    new DriveAutonomousCommand(m_subsystem, 0.1, 1, 0),
-    new WaitCommand(1),
-    new DriveAutonomousCommand(m_subsystem, 0, 0, 0));
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
+    new DriveAutonomousCommand(driveSubsystem, 0, 0, -.5, 2000),
+    new DriveAutonomousCommand(driveSubsystem, 0.2, 0, 0, 1000),  
+    new DriveAutonomousCommand(driveSubsystem, 0, 0.2, 0, 1000),
+    new DriveAutonomousCommand(driveSubsystem, -0.2, 0, 0, 1000),
+    new DriveAutonomousCommand(driveSubsystem, 0, -0.2, 0, 1000));
   }
 }
