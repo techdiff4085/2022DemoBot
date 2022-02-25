@@ -4,12 +4,17 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.math.trajectory.TrajectoryParameterizer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DriveAutonomousCommand;
+import frc.robot.commands.TurnToAngleCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RobotGoBurrrrrCommand;
@@ -31,9 +36,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final SpinnySub m_spinnySub = new SpinnySub();
+  private final AHRS navX = new AHRS(SPI.Port.kMXP);
+
 
   private final XboxController m_xboxController = new XboxController(0);
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem, m_xboxController);
@@ -49,7 +55,7 @@ public class RobotContainer {
 
 
  
-    m_sendableChooser.setDefaultOption("RobotGoBurrrrr", new RobotGoBurrrrrCommand(m_driveSubsystem, m_lights));
+    m_sendableChooser.setDefaultOption("RobotGoBurrrrr", new RobotGoBurrrrrCommand(m_driveSubsystem, navX, m_lights));
     m_sendableChooser.addOption("RotateAutonomous", new RotateAutonomousCommand(m_driveSubsystem, m_lights));
     m_sendableChooser.addOption("ThatOneAuto", new ThatOneAutoCommand(m_driveSubsystem, m_lights));
 

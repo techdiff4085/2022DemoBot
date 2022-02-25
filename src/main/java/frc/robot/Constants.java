@@ -20,4 +20,8 @@ public final class Constants {
 
     public static int SpinnyLimitSwitch = 9;
     public static int SpinnyThing = 1;
+
+    public static double KP = 0.05f;
+    public static double KI = 0;
+    public static double KD = 0.001;
 }

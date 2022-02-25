@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -36,6 +37,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void drive(double y, double x, double z){
       mechanumDrive.driveCartesian(y, x, z);
+  }
+
+  public void turnToAngle(double turnToAngle, AHRS navX){
+    mechanumDrive.driveCartesian(0,0,turnToAngle, navX.getAngle());
   }
 
   @Override
