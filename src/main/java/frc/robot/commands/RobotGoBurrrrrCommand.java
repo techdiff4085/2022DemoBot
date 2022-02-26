@@ -18,7 +18,7 @@ public class RobotGoBurrrrrCommand extends SequentialCommandGroup {
   public RobotGoBurrrrrCommand(DriveSubsystem driveSubsystem, AHRS navX, Spark lights) {
     lights.set(0.93);
     addCommands(
-      new TurnToAngleCommand(driveSubsystem, navX, 45)
+      new TurnToAngleCommand(driveSubsystem, navX, 180)
     );
       /*
     new DriveAutonomousCommand(driveSubsystem, 0, 0, -.5, 2000),

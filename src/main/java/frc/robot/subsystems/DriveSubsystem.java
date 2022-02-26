@@ -40,7 +40,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void turnToAngle(double turnToAngle, AHRS navX){
-    mechanumDrive.driveCartesian(0,0,turnToAngle, navX.getAngle());
+    mechanumDrive.driveCartesian(0,0,turnToAngle, 0);
   }
 
   @Override

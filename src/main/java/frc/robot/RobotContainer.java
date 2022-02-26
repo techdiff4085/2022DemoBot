@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.TurnToAngleCommand;
+import frc.robot.commands.DriveAutonomousCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RobotGoBurrrrrCommand;
@@ -71,6 +72,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    JoystickButton buttonB = new JoystickButton(m_xboxController, XboxController.Button.kB.value);
+    buttonB.whenActive(new DriveAutonomousCommand(m_driveSubsystem, 0, 0, 0.6, 260));
+
+    JoystickButton buttonY = new JoystickButton(m_xboxController, XboxController.Button.kY.value);
+    buttonY.whenActive(new DriveAutonomousCommand(m_driveSubsystem, 0, 0, 0.35, 650));
+
      JoystickButton buttonX = new JoystickButton(m_xboxController, XboxController.Button.kX.value);
      buttonX
       .whenActive(new ToggleFastModeCommand(m_driveSubsystem));
