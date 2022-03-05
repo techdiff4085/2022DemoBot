@@ -20,4 +20,12 @@ public final class Constants {
 
     public static int SpinnyThing = 1;
     public static int Spinnythinglimit = 8;
+<<<<<<< HEAD
+    public static int Spinnythinglimit = 8;
+=======
+
+    public static double KP = 0.01f;
+    public static double KI = 0;
+    public static double KD = 0.001;
+>>>>>>> 6c81c54de6f04176e23e5a8c5f2257063e5b98b2
 }

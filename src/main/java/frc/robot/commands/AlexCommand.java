@@ -4,24 +4,21 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.DriveSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class DriveCommand extends CommandBase {
+public class AlexCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveSubsystem m_driveSubsystem;
-  private final XboxController m_xboxController;
+  private final ExampleSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveCommand(DriveSubsystem subsystem, XboxController xboxController) {
-    m_driveSubsystem = subsystem;
-    m_xboxController = xboxController;
+  public AlexCommand(ExampleSubsystem subsystem) {
+    m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -32,17 +29,7 @@ public class DriveCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    double y = m_xboxController.getLeftY();
-    double x = m_xboxController.getLeftX();
-    double z = m_xboxController.getRightX();
-
-    if (m_driveSubsystem.getIsFastMode()){
-      m_driveSubsystem.drive(y, x, z);
-    } else {
-      m_driveSubsystem.drive(y/8, x/8, z/5);
-    }
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
