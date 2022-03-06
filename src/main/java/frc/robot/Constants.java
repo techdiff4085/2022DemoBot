@@ -18,7 +18,10 @@ public final class Constants {
     public static int LeftRearWheel = 13;
     public static int RightRearWheel = 0;
 
+    //CAN port
     public static int SpinnyThing = 1;
+
+    //DIO Port
     public static int Spinnythinglimit = 8;
 
     public static double KP = 0.01f;

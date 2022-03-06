@@ -12,7 +12,8 @@ import frc.robot.Constants;
 
 public class SpinnySub extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private WPI_VictorSPX spinmoter = new WPI_VictorSPX(1);
+  private WPI_VictorSPX spinmoter = new WPI_VictorSPX(Constants.SpinnyThing);
+  // 1-4 add second motor here
 
   private DigitalInput limitSwitch = new DigitalInput(Constants.Spinnythinglimit);
 
@@ -20,6 +21,7 @@ public class SpinnySub extends SubsystemBase {
 
   public void Spin(){
     spinmoter.set(0.5);
+    // 2-4 set speed for second motor
   }
 
   @Override
@@ -29,11 +31,12 @@ public class SpinnySub extends SubsystemBase {
 
   @Override
   public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+    // 3-4 This method will be called once per scheduler run during simulation
   }
   public boolean StopLimitSwitch() {
     if(limitSwitch.get()){
       spinmoter.set(0);
+      //4-4 set second motor to '0' too.
       return true;
     } else {
       return false;
