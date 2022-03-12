@@ -18,6 +18,7 @@ import frc.robot.commands.TurnToAngleCommand;
 import frc.robot.commands.DriveAutonomousCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FindLimelightCommand;
 import frc.robot.commands.RobotGoBurrrrrCommand;
 import frc.robot.commands.RotateAutonomousCommand;
 import frc.robot.commands.SpinnyThingyCommand;
@@ -25,6 +26,7 @@ import frc.robot.commands.ThatOneAutoCommand;
 import frc.robot.commands.ToggleFastModeCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.SpinnySub;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -39,6 +41,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final SpinnySub m_spinnySub = new SpinnySub();
+  private final LimelightSubsystem m_limelightSub = new LimelightSubsystem();
   private final AHRS navX = new AHRS(SPI.Port.kMXP);
 
 
@@ -84,6 +87,10 @@ public class RobotContainer {
       JoystickButton buttonA = new JoystickButton(m_xboxController, XboxController.Button.kA.value);
      buttonA
       .whenActive(new SpinnyThingyCommand(m_spinnySub));
+
+      JoystickButton buttonLimelight = new JoystickButton(m_xboxController, XboxController.Button.kLeftBumper.value);
+      buttonLimelight
+       .whenActive(new FindLimelightCommand(m_limelightSub));
   }
 
   /**
