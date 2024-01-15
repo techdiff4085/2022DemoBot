@@ -1,4 +1,4 @@
-# 2022DemoBot
+# 2022DemoBot - This repository is no longer maintained.
 Code for the demo bot used in the 2022 season
 
 The demo bot has the following components:
